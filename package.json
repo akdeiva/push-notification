@@ -1,0 +1,31 @@
+{
+  "name": "push-api-demo",
+  "version": "1.0.0",
+  "description": "An attempt to create a simple working example for the Push API.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akdeiva/push-notification.git"
+  },
+  "keywords": [
+    "push notification api",
+    "web push demo"
+  ],
+  "author": "Deivanaathan Krishnan",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/akdeiva/push-notification/issues"
+  },
+  "homepage": "https://github.com/akdeiva/push-notification",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "mongodb": "^2.2.24",
+    "serve-static": "^1.10.2",
+    "web-push": "^3.2.2"
+  }
+}
