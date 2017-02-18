@@ -82,11 +82,7 @@ app.post('/subscribe', function (request, response) {
 });
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/bag.html'));
-});
-
-app.get('/google856357e5d8a30aa4.html', function(req, res) {
-    res.sendFile(path.join(__dirname + '/google856357e5d8a30aa4.html'));
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/trigger', function(req, res) {
