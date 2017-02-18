@@ -2,7 +2,7 @@
   "name": "Push Notification Demo",  
   "short_name": "Push Demo",  
   "icons": [{  
-        "src": "macys-notification.png",  
+        "src": "notification.png",  
         "sizes": "111x111",
         "type": "image/png" 
       }],  

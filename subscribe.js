@@ -90,13 +90,26 @@ function postSubscribeObj(subscription) {
     // and the push subscription endpoint + key the server needs
     // to send push messages
     var request = new XMLHttpRequest();
-
+    request.onreadystatechange = function() {//Call a function when the state changes.
+      if(request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+          setTimeout(function() {
+            triggerNotification();
+          }, 1000);
+      }
+    }
     request.open('POST', serviceURLHost + '/subscribe');
     request.setRequestHeader('Content-Type', 'application/json');
     
     request.send(JSON.stringify(subscription));
 }
 
+function triggerNotification() {
+    // Create a new XHR and request trigger call
+    //to fire the server side push notification
+    var request = new XMLHttpRequest();
+    request.open('GET', serviceURLHost + '/trigger');
+    request.send();
+}
 
 function handleChannelMessage(data) {
   
