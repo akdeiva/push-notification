@@ -1,6 +1,6 @@
 var isPushEnabled = false;
 var useNotifications = false;
-var serviceURLHost = 'https://deiva-push-notification.herokuapp.com/';
+var serviceURLHost = 'https://deiva-push.herokuapp.com';
 Notification.requestPermission();
 
 window.addEventListener('load', function() {   
