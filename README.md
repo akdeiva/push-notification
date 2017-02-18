@@ -42,5 +42,7 @@ To get it running:
    [https://127.0.0.1:7000/index.html](https://127.0.0.1:7000/index.html)
    (Note: You will need to add a security exception)
 
+You can see the working example in this url : https://deiva-push.herokuapp.com/. Open this in your chrome or firefox browser and proceed with the next steps as mentioned and you should be able to see the working version of the notifications.
+
 Note: This code is forked and influenced by Chris David Mills repo of push demo (https://github.com/chrisdavidmills/push-api-demo). The code base is extended for different type of subscription and server side implementation with MongoDB and node for targeted audience based notifications.
 
