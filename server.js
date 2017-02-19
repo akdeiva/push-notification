@@ -38,6 +38,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(serveStatic(__dirname, {'index': false}));
+
 app.post('/subscribe', function (request, response) {
     var body = "";
     var userID = request.cookies.userId;
@@ -75,10 +76,48 @@ app.post('/subscribe', function (request, response) {
 
         }
       });
+    });
+});
 
 
+app.put('/subscribe', function (request, response) {
+    var body = "";
+    var userID = request.cookies.userId;
+    
+    request.on('data', function(chunk) {
+      body += chunk;
     });
 
+    request.on('end', function() {      
+      response.writeHead(200, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", 
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+
+      response.write("subscription updated successfully");
+
+      response.end();
+    });
+});
+
+app.delete('/subscribe', function (request, response) {
+    var body = "";
+    var userID = request.cookies.userId;
+    
+    request.on('data', function(chunk) {
+      body += chunk;
+    });
+
+    request.on('end', function() {
+      response.writeHead(200, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", 
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+
+      response.write("unsubscription done successfully");
+
+      response.end();
+    });
 });
 
 app.get('/', function(req, res) {

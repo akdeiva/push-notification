@@ -14,7 +14,7 @@ self.onmessage = function(e) {
 function fireNotification(obj, event) {
   var title = obj.title;  
   var body = obj.message; 
-  var icon = 'macys-notification.png';  
+  var icon = 'notification.png';  
   var tag = 'push';
    
   event.waitUntil(self.registration.showNotification(title, {
