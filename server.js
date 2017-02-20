@@ -50,10 +50,10 @@ app.post('/subscribe', function (request, response) {
     request.on('end', function() {
       if (!body) return;
       var obj = JSON.parse(body);
-      console.log('POSTed: ');
-      console.log(obj);
+      console.log('new subscription: ');
       obj.userId = userID;
       obj._id = userID;
+      console.log(obj);
       db.collection('subscriptions').save(obj, (err, result) => {
         if (err) {
           console.log(err);
@@ -92,10 +92,10 @@ app.put('/subscribe', function (request, response) {
     request.on('end', function() {
       if (!body) return;
       var obj = JSON.parse(body);
-      console.log('POSTed: ');
-      console.log(obj);
+      console.log('update subscription: ');
       obj.userId = userID;
       obj._id = userID;
+      console.log(obj);
       db.collection('subscriptions').save(obj, (err, result) => {
         if (err) {
           console.log(err);
