@@ -108,6 +108,7 @@ app.put('/subscribe', function (request, response) {
 
           response.end();
         } else {
+          console.log(result);
           response.writeHead(200, {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*", 
