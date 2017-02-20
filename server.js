@@ -53,6 +53,7 @@ app.post('/subscribe', function (request, response) {
       console.log('POSTed: ');
       console.log(obj);
       obj.userId = userID;
+      obj._id = userID;
       db.collection('subscriptions').save(obj, (err, result) => {
         if (err) {
           console.log(err);
@@ -88,15 +89,36 @@ app.put('/subscribe', function (request, response) {
       body += chunk;
     });
 
-    request.on('end', function() {      
-      response.writeHead(200, {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+    request.on('end', function() {
+      if (!body) return;
+      var obj = JSON.parse(body);
+      console.log('POSTed: ');
+      console.log(obj);
+      obj.userId = userID;
+      obj._id = userID;
+      db.collection('subscriptions').save(obj, (err, result) => {
+        if (err) {
+          console.log(err);
+          response.writeHead(203, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
 
-      response.write("subscription updated successfully");
+          response.write("subscription update not successfull");
 
-      response.end();
+          response.end();
+        } else {
+          response.writeHead(200, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+
+          response.write("subscribed updated successfully");
+
+          response.end();
+
+        }
+      });
     });
 });
 
@@ -107,16 +129,33 @@ app.delete('/subscribe', function (request, response) {
     request.on('data', function(chunk) {
       body += chunk;
     });
-
+    //db.products.remove( { qty: { $gt: 20 } }, true )
     request.on('end', function() {
-      response.writeHead(200, {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
 
-      response.write("unsubscription done successfully");
+      db.collection('subscriptions').remove({"_id": userID}, (err, result) => {
+        if (err) {
+          console.log(err);
+          response.writeHead(203, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
 
-      response.end();
+          response.write("unsubscription not successfull");
+
+          response.end();
+        } else {
+          response.writeHead(200, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+
+          response.write("unsubscription done successfully");
+
+          response.end();
+
+        }
+      });
+
     });
 });
 
@@ -163,8 +202,7 @@ app.get('/trigger', function(req, res) {
 MongoClient.connect(mangoDbURI, (err, database) => {
   if (err) return console.log(err)
   db = database
-  db.collection('chatmessages').remove();
-  db.collection('subscriptions').remove();
+  db.collection('subscriptions').drop();
   http.createServer(app).listen(process.env.PORT || 3000);
   console.log("Server Running on ." + (process.env.PORT || 3000));   
 });
