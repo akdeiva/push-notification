@@ -198,6 +198,23 @@ app.get('/trigger', function(req, res) {
 
 });
 
+app.get('/getSubscriptions', function(req, res) {
+    console.log("inside getSubscriptions function:");
+    db.collection('subscriptions').find().toArray(function(err, results) {
+      for(i = 0; i < (results.length-1); i++) {
+          console.log(results[i]);
+      };
+      res.writeHead(200, {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", 
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Headers"});
+
+      res.write("getSubscriptions returned successfully");
+
+      res.end();
+    });
+
+});
 
 MongoClient.connect(mangoDbURI, (err, database) => {
   if (err) return console.log(err)
